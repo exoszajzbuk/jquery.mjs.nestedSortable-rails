@@ -730,7 +730,7 @@
             var o = $.extend({}, this.options, options),
                 sDepth = o.startDepthCount || 0,
                 ret = [],
-                left = 1;
+                left = 0;
 
             if (!o.excludeRoot) {
                 ret.push({
@@ -738,7 +738,7 @@
                     "parent_id": null,
                     "depth": sDepth,
                     "left": left,
-                    "right": ($(o.items, this.element).length + 1) * 2
+                    "right": ($(o.items, this.element).length) * 2
                 });
                 left++;
             }
@@ -749,6 +749,7 @@
 
             ret = ret.sort(function(a, b) { return (a.left - b.left); });
 
+            ret.shift()
             return ret;
 
             function _recursiveArray(item, depth, _left) {
